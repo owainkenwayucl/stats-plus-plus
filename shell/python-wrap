@@ -1,0 +1,6 @@
+#!/bin/bash 
+# wrapper for python3 script
+
+# get script location
+DIR=$(dirname "$(readlink -f "$0")")
+$DIR/python/${0}.py "$@"
