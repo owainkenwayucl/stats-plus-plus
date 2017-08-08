@@ -25,3 +25,20 @@ dbquery <- function(db, query, mysqlhost="mysql.external.legion.ucl.ac.uk", mysq
 
   return(data)
 }
+
+# Convert list-like structures to an SQL list.
+sqllist <- function(rlist) {
+  sqlstr <- "("
+
+  for (a in rlist) {
+
+    if (sqlstr != "(") {
+      sqlstr <- paste(sqlstr, ",", sep="")
+    }
+    sqlstr <- paste(sqlstr, "'", sep="")
+    sqlstr <- paste(sqlstr, a, sep="")
+    sqlstr <- paste(sqlstr, "'", sep="")
+  }
+  sqlstr <- paste(sqlstr, ")", sep="")
+  return(sqlstr)
+}
