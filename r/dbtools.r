@@ -30,14 +30,19 @@ dbquery <- function(db, query, mysqlhost="mysql.external.legion.ucl.ac.uk", mysq
 sqllist <- function(rlist) {
   sqlstr <- "("
 
-  for (a in rlist) {
-
-    if (sqlstr != "(") {
-      sqlstr <- paste(sqlstr, ",", sep="")
+  if (typeof(rlist) == "character") {
+    sqlstr <- paste(sqlstr, "'", sep="")
+    sqlstr<-paste(sqlstr, rlist, sep="")
+    sqlstr <- paste(sqlstr, "'", sep="")
+  } else {
+    for (a in rlist) {
+      if (sqlstr != "(") {
+        sqlstr <- paste(sqlstr, ",", sep="")
+      }
+      sqlstr <- paste(sqlstr, "'", sep="")
+      sqlstr <- paste(sqlstr, a, sep="")
+      sqlstr <- paste(sqlstr, "'", sep="")
     }
-    sqlstr <- paste(sqlstr, "'", sep="")
-    sqlstr <- paste(sqlstr, a, sep="")
-    sqlstr <- paste(sqlstr, "'", sep="")
   }
   sqlstr <- paste(sqlstr, ")", sep="")
   return(sqlstr)
