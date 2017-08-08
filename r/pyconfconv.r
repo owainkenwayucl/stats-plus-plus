@@ -10,14 +10,14 @@
 
 # This version pulls a section.
 pyconfconverts <- function(filename, section) {
-  pyconfconvcomm <- paste0("../python/pyconfconv.py -l r -i ", filename, " -s ", section)
+  pyconfconvcomm <- paste0("python/pyconfconv.py -l r -i ", filename, " -s ", section)
   pyconfconvresult <- system(pyconfconvcomm, intern = TRUE)
   return(pyconfconvresult)
 }
 
 # This version pulls the whole file.
 pyconfconvert <- function(filename) {
-  pyconfconvcomm <- paste0("../python/pyconfconv.py -l r -i ", filename)
+  pyconfconvcomm <- paste0("python/pyconfconv.py -l r -i ", filename)
   pyconfconvresult <- system(pyconfconvcomm, intern = TRUE)
   return(pyconfconvresult)
 }
