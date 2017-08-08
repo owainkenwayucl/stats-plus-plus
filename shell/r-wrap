@@ -3,4 +3,4 @@
 
 # get script location
 DIR=$(dirname "$(readlink -f "$0")")
-$DIR/r/${0}.r "$@"
+$DIR/../r/${0}.r "$@"
