@@ -1,3 +1,6 @@
+# Place where I put non-version controlled guff
+junk/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
