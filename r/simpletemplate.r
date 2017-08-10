@@ -13,3 +13,10 @@ templatefile <- function(filename, keys) {
   x <- readChar(filename, file.info(filename)$size)
   return(templatestring(x, keys))
 }
+
+# Simplify making a matched pair of vectors for keys.
+genkeys <- function(names, values) {
+  r <- values
+  names(r) <- names
+  return(r)
+}
