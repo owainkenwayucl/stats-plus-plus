@@ -3,14 +3,14 @@ dbquery <- function(db, query, mysqlhost="mysql.external.legion.ucl.ac.uk", mysq
 
 # Pull in the RMySQL library and my tool for reading Python ini files.
   (library(RMySQL))
-  source("r/pyconfconv.r")
+  source("r/rini.r")
 
 # Get authentication information.
-  eval(parse(text=pyconfconverts("~/.stats_secrets/accounts", "database")))
+  authdetails <- rinisect("~/.stats_secrets/accounts", "database")
 
   con <- dbConnect(MySQL(),
-                 user = user,
-                 password = pass,
+                 user = authdetails['user'],
+                 password = authdetails['pass'],
                  dbname = db,
                  host = mysqlhost,
                  port = mysqlport)
