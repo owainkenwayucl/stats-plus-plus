@@ -1,5 +1,5 @@
-# Read in an ini file and map it to a table.
-rini <- function(filename, section) {
+# Read in an ini file and map a section to a table.
+rinisect <- function(filename, section) {
 
   ns <- c()
   values <- c()
