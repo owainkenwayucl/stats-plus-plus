@@ -13,5 +13,4 @@ This is a set of tools that can hopefully be used to write useful just in time s
 ### R
 
 * R
-* Python 3 (to import settings files)
 * RMySQL
