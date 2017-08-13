@@ -14,3 +14,17 @@ This is a set of tools that can hopefully be used to write useful just in time s
 
 * R
 * RMySQL
+
+## Examples
+
+Here's an example of the kind of thing you can do now in R:
+
+```R
+source("r/simpletemplate.r")
+source("r/dbtools.r")
+keys <- genkeys(c("%DB%", "%PERIOD%"), c("thomas_sgelogs", "2017-08"))
+query <- templatefile("sql/mean-slowdown-by-user.sql", keys)
+data <- dbquery("thomas_sgelogs", query)
+```
+
+What's happening here is we are setting some parameters for the `mean-slowdown-by-user` SQL query, namely which service and the time period (August 2017), using my templating library to put them into the query, passing that query to the database and getting back an R data object which we can do the usual R tricks on.
