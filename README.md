@@ -22,6 +22,7 @@ Here's an example of the kind of thing you can do now in R:
 ```R
 source("r/simpletemplate.r")
 source("r/dbtools.r")
+
 keys <- genkeys(c("%DB%", "%PERIOD%"), c("thomas_sgelogs", "2017-08"))
 query <- templatefile("sql/mean-slowdown-by-user.sql", keys)
 data <- dbquery("thomas_sgelogs", query)
@@ -36,10 +37,6 @@ import simpletemplate as st
 import dbtools as dbt 
 
 keys = {'%DB%':'thomas_sgelogs', '%PERIOD%':'2017-08'}
-
 query = st.templatefile(filename="sql/mean-slowdown-by-user.sql", keys=keys)
-
 output = dbt.dbquery(db='thomas_sgelogs', query=query)
-
-print(output)
 ```
