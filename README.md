@@ -28,3 +28,18 @@ data <- dbquery("thomas_sgelogs", query)
 ```
 
 What's happening here is we are setting some parameters for the `mean-slowdown-by-user` SQL query, namely which service and the time period (August 2017), using my templating library to put them into the query, passing that query to the database and getting back an R data object which we can do the usual R tricks on.
+
+The equivalent in Python3 looks like this:
+
+```Python
+import simpletemplate as st 
+import dbtools as dbt 
+
+keys = {'%DB%':'thomas_sgelogs', '%PERIOD%':'2017-08'}
+
+query = st.templatefile(filename="sql/mean-slowdown-by-user.sql", keys=keys)
+
+output = dbt.dbquery(db='thomas_sgelogs', query=query)
+
+print(output)
+```
