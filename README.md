@@ -38,5 +38,5 @@ import dbtools as dbt
 
 keys = {'%DB%':'thomas_sgelogs', '%PERIOD%':'2017-08'}
 query = st.templatefile(filename="sql/mean-slowdown-by-user.sql", keys=keys)
-output = dbt.dbquery(db='thomas_sgelogs', query=query)
+data = dbt.dbquery(db='thomas_sgelogs', query=query)
 ```
