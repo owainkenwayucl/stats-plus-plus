@@ -3,4 +3,4 @@
 
 # get script location
 DIR=$(dirname "$(readlink -f "$0")")
-$DIR/../python/${0}.py "$@"
+PYTHONPATH=$DIR/python:$PYTHONPATH $DIR/../python/${0}.py "$@"
