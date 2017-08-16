@@ -25,7 +25,7 @@ source("r/dbtools.r")
 
 keys <- genkeys(c("%DB%", "%PERIOD%"), c("thomas_sgelogs", "2017-08"))
 query <- templatefile("sql/mean-slowdown-by-user.sql", keys)
-data <- dbquery("thomas_sgelogs", query)
+data <- dbquery(keys["%DB%"], query)
 ```
 
 What's happening here is we are setting some parameters for the `mean-slowdown-by-user` SQL query, namely which service and the time period (August 2017), using my templating library to put them into the query, passing that query to the database and getting back an R data object which we can do the usual R tricks on.
@@ -38,5 +38,5 @@ import dbtools as dbt
 
 keys = {'%DB%':'thomas_sgelogs', '%PERIOD%':'2017-08'}
 query = st.templatefile(filename='sql/mean-slowdown-by-user.sql', keys=keys)
-data = dbt.dbquery(db='thomas_sgelogs', query=query)
+data = dbt.dbquery(db=keys['%DB%'], query=query)
 ```
