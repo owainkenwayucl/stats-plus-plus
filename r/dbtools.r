@@ -28,37 +28,23 @@ dbquery <- function(db, query, mysqlhost="mysql.external.legion.ucl.ac.uk", mysq
 
 # Convert list-like structures to an SQL list.
 sqllist <- function(rlist) {
-  sqlstr <- "("
-
-  if (typeof(rlist) == "character") {
-    sqlstr <- paste(sqlstr, "'", collapse="")
-    sqlstr<-paste(sqlstr, rlist, collapse="")
-    sqlstr <- paste(sqlstr, "'", collapse="")
-  } else {
-    for (a in rlist) {
-      if (sqlstr != "(") {
-        sqlstr <- paste(sqlstr, ",", collapse="")
-      }
-      sqlstr <- paste(sqlstr, "'", collapse="")
-      sqlstr <- paste(sqlstr, a, collapse="")
-      sqlstr <- paste(sqlstr, "'", collapse="")
-    }
+  sqlstr <- "('"
+  for (a in rlist) {
+    sqlstr <- paste(sqlstr, a, sep="','", collapse="")
   }
-  sqlstr <- paste(sqlstr, ")", collapse="")
+
+  sqlstr <- paste(sqlstr, "')", collapse="", sep="")
   return(sqlstr)
 }
 
 
 # Build owner limit string for queries.
-onlimits <- function(users="*") {
+onlimits <- function(users) {
   query <- ""
 
-# If we don't have the default value, build a limit on the query.
-  if (users != "*") {
-    userlist <- sqllist(users)
-    query <- paste(query, " and owner in ", collapse="")
-    query <- paste(query, userlist, collapse="")
-  }
+  userlist <- sqllist(users)
+  query <- paste(query, " and owner in ", collapse="")
+  query <- paste(query, userlist, collapse="")
 
   return(query)
 }
