@@ -61,7 +61,7 @@ def sqllist(pylist):
 def onlimits(users="*"):
     query = ""
 
-    # if users != * then construct a node list.
+    # if users != * then construct a user list.
     if users != "*":
         userlist = sqllist(users)
         query = query + " and owner in " + userlist
