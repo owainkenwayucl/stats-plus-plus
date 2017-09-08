@@ -60,5 +60,5 @@ onlimits <- function(users="*") {
     query <- paste(query, userlist, sep="")
   }
 
-  return query
+  return(query)
 }
