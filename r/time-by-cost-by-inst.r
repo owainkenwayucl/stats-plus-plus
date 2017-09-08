@@ -2,7 +2,7 @@
 args <- commandArgs(trailingOnly=TRUE)
 
 if (length(args)!=1) {
-  cat("jsperinst YYYY-MM\n")
+  cat("time-by-cost-by-inst YYYY-MM\n")
   return(NA)
 }
 period <- args
