@@ -57,7 +57,7 @@ def sqllist(pylist):
     return sqlstr
 
 
-# Build owner/node limit string for queries.
+# Build owner limit string for queries.
 def onlimits(users="*"):
     query = ""
 
