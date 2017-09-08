@@ -31,20 +31,20 @@ sqllist <- function(rlist) {
   sqlstr <- "("
 
   if (typeof(rlist) == "character") {
-    sqlstr <- paste(sqlstr, "'", sep="")
-    sqlstr<-paste(sqlstr, rlist, sep="")
-    sqlstr <- paste(sqlstr, "'", sep="")
+    sqlstr <- paste(sqlstr, "'", collapse="")
+    sqlstr<-paste(sqlstr, rlist, collapse="")
+    sqlstr <- paste(sqlstr, "'", collapse="")
   } else {
     for (a in rlist) {
       if (sqlstr != "(") {
-        sqlstr <- paste(sqlstr, ",", sep="")
+        sqlstr <- paste(sqlstr, ",", collapse="")
       }
-      sqlstr <- paste(sqlstr, "'", sep="")
-      sqlstr <- paste(sqlstr, a, sep="")
-      sqlstr <- paste(sqlstr, "'", sep="")
+      sqlstr <- paste(sqlstr, "'", collapse="")
+      sqlstr <- paste(sqlstr, a, collapse="")
+      sqlstr <- paste(sqlstr, "'", collapse="")
     }
   }
-  sqlstr <- paste(sqlstr, ")", sep="")
+  sqlstr <- paste(sqlstr, ")", collapse="")
   return(sqlstr)
 }
 
@@ -56,8 +56,8 @@ onlimits <- function(users="*") {
 # If we don't have the default value, build a limit on the query.
   if (users != "*") {
     userlist <- sqllist(users)
-    query <- paste(query, " and owner in ", sep="")
-    query <- paste(query, userlist, sep="")
+    query <- paste(query, " and owner in ", collapse="")
+    query <- paste(query, userlist, collapse="")
   }
 
   return(query)
