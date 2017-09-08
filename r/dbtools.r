@@ -47,3 +47,18 @@ sqllist <- function(rlist) {
   sqlstr <- paste(sqlstr, ")", sep="")
   return(sqlstr)
 }
+
+
+# Build owner limit string for queries.
+onlimits <- function(users="*") {
+  query <- ""
+
+# If we don't have the default value, build a limit on the query.
+  if (users != "*") {
+    userlist <- sqllist(users)
+    query <- paste(query, " and owner in ", sep="")
+    query <- paste(query, userlist, sep="")
+  }
+
+  return query
+}
