@@ -2,12 +2,15 @@
 dbquery <- function(db, query, mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlport = 3306) {
 
 # Pull in the RMySQL library and my tool for reading Python ini files.
-  (library(RMySQL))
+  suppressPackageStartupMessages((library(RMySQL)))
   source("r/rini.r")
 
 # Get authentication information.
   authdetails <- rinisect("~/.stats_secrets/accounts", "database")
 
+  # Disable RMySQL's type warnings.
+  options(warn=-1)  
+  
   con <- dbConnect(MySQL(),
                  user = authdetails['user'],
                  password = authdetails['pass'],
@@ -18,10 +21,15 @@ dbquery <- function(db, query, mysqlhost="mysql.external.legion.ucl.ac.uk", mysq
   on.exit(dbDisconnect(con))
 
   q <- dbSendQuery(con, query)
+
+
   data <- fetch(q)
   stat <- dbHasCompleted(q)
 
   dbClearResult(q)
+
+  # Re-enable warnings.
+  options(warn=0)
 
   return(data)
 }
