@@ -2,7 +2,7 @@
 args <- commandArgs(trailingOnly=TRUE)
 
 if (length(args)!=2) {
-  cat("time-by-cost-by-inst institutionYYYY-MM\n")
+  cat("time-by-cost-by-inst institution YYYY-MM\n")
   return(NA)
 }
 
