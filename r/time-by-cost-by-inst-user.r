@@ -18,7 +18,7 @@ dba <- "thomas_sgelogs"
 
 keys <- genkeys(c("%INSTITUTE%"), c(inst))
 query <- templatefile("sql/ist-to-users.sql", keys)
-users <- dbquery(db, query)
+users <- unique(dbquery(db, query))
 
 results <- data.frame(inst = character(), single=numeric(0), optimal=numeric(0), big=numeric(0))
 
