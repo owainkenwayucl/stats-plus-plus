@@ -37,12 +37,9 @@ for (a in users$username) {
     keys <- genkeys(c("%DB%", "%PERIOD%", "%LOWERCOST%", "%UPPERCOST%", "%ONLIMITS%"), c(dba, period, "121", "10000000", userlimits))
     query <- templatefile("sql/usage-cost-opts.sql", keys)
     bigusage <- dbquery(dba, query)
-
-    tempframe <- data.frame(inst=a, single=usage, optimal=goodusage, big=bigusage)
     
-    if ((!is.na(usage)) && (!is.na(goodusage)) && (!is.na(bigusage))){
-      results <- rbind(results, tempframe)
-    }
+    tempframe <- data.frame(inst=a, single=usage, optimal=goodusage, big=bigusage)
+    results <- rbind(results, tempframe)
 
 } 
 names(results)<-c("User", "Single", "Target", "Large")
