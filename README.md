@@ -8,7 +8,7 @@ This is a set of tools that can hopefully be used to write useful just in time s
 ### Python
 
 * Python 3
-* The official mysql connector package.
+* The official mysql connector package
 
 ### R
 
