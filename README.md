@@ -8,7 +8,7 @@ This is a set of tools that can hopefully be used to write useful just in time s
 ### Python
 
 * Python 3
-* `mysqlclient` from PyPi (or the matching package from the Ubuntu repos)
+* The official mysql connector package.
 
 ### R
 
