@@ -13,20 +13,20 @@
 '''
 def dbquery(db, query, mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlport = 3306 ):
     from auth.secrets import Secrets
-    import MySQLdb   # Note need mysqlclient package from pypi
+    import mysql.connector # Use the "official" MySQL connector
 
     # Set up our authentication.
     s = Secrets()
 
     # Connect to database.
-    conn = MySQLdb.Connect(host=mysqlhost,
+    conn = mysql.connector.connect(host=mysqlhost,
                            port=mysqlport,
                            user=s.dbuser,
-                           passwd=s.dbpasswd,
-                           db=db)
+                           password=s.dbpasswd,
+                           database=db)
 
     # Set up cursor.
-    cursor = conn.cursor(MySQLdb.cursors.DictCursor)
+    cursor = conn.cursor(dictionary=True)
 
     print(">>> DEBUG SQL query: " + query)
 
