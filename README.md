@@ -40,3 +40,17 @@ keys = {'%DB%':'thomas_sgelogs', '%PERIOD%':'2017-08'}
 query = st.templatefile(filename='sql/mean-slowdown-by-user.sql', keys=keys)
 data = dbt.dbquery(db=keys['%DB%'], query=query)
 ```
+
+Or even better, in [hy](http://docs.hylang.org/en/stable/):
+
+```Clojure
+(import simpletemplate)
+(import dbtools)
+
+(setv keys {"%DB%" "thomas_sgelogs" "%PERIOD%" "2017-08"})
+(setv query (simpletemplate.templatefile 
+                            :filename "sql/mean-slowdown-by-user.sql"
+                            :keys keys))
+(setv data (dbtools.dbquery :db (get keys "%DB%")
+                            :query query))
+```
