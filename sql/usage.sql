@@ -1,3 +1,2 @@
-select sum((ru_wallclock*cost)) from %DB%.accounting where 
-       ((end_time > unix_timestamp('%START%')) and 
-        (end_time < unix_timestamp('%STOP%')) );
+select sum((run_time*cost)) from %DB%.accounting_view where 
+       ((end_time > start_time AND end_period = "%PERIOD%"));
