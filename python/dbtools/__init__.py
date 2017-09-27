@@ -28,7 +28,8 @@ def dbquery(db, query, mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlport = 
     # Set up cursor.
     cursor = conn.cursor(dictionary=True)
 
-    print(">>> DEBUG SQL query: " + query)
+    # Debug line.
+    # print(">>> DEBUG SQL query: " + query)
 
     # Run query.
     cursor.execute(query)
@@ -73,4 +74,11 @@ def unpackresults(results, key):
     r = []
     for a in results:
         r.append(a[key])
+    return r
+
+# Convert potentially null decimal numbers to floats.
+def undecimal(n):
+    r = 0.0
+    if type(n) != type(None):
+        r = float(n)
     return r
