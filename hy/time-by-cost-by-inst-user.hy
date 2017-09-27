@@ -38,7 +38,7 @@
   (setv (get results i) {"Single" singlenodeusage "Ideal" idealusage "Big" bigusage})
 )
 
-(print "Username,Single Node,Ideal Size, Big")
+(print "Username,Single Node,Ideal Size,Big")
 (for [i users]
   (print i :end ",")
   (print (get (get results i) "Single") :end ",")
