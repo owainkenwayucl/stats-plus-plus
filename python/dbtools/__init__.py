@@ -67,3 +67,10 @@ def onlimits(users="*"):
         query = query + " and owner in " + userlist
 
     return query
+
+# Pull a list of values for a field from a dict.
+def unpackresults(results, key):
+    r = []
+    for a in results:
+        r.append(a[key])
+    return r
