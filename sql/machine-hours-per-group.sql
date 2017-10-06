@@ -1,4 +1,4 @@
-# Heather wrote this - need to convert to use Simpletemplate.
+# Heather wrote this and I converted it to use SimpleTemplate.
 
 SELECT COUNT(*) as num_jobs, sum(cost*ru_wallclock)/3600 AS core_hours, 
   sum(cost*ru_wallclock)/(3600*17000) AS machine_hours
@@ -18,8 +18,8 @@ FROM %DB%.accounting AS t1
 
 WHERE  
   end_time > start_time 
-  AND start_time > unix_timestamp('%START%') #Sept
-  AND end_time < unix_timestamp('%END%')   #Sept
+  AND start_time > unix_timestamp('%START%')
+  AND end_time < unix_timestamp('%END%')
 
   AND (
     t1.project='Gold' AND SUBSTRING_INDEX(account, ';', 1) LIKE '%PROJECT%%' # paid jobs for this project only
