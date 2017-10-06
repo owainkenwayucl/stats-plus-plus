@@ -17,9 +17,8 @@ FROM %DB%.accounting AS t1
   ON t1.owner = distinctuser.username 
 
 WHERE  
-  end_time > start_time 
-  AND start_time > unix_timestamp('%START%')
-  AND end_time < unix_timestamp('%END%')
+  end_time > start_time
+  AND date_format(from_unixtime(end_time),"%Y-%m") = '%PERIOD%'
 
   AND (
     t1.project='Gold' AND SUBSTRING_INDEX(account, ';', 1) LIKE '%PROJECT%%' # paid jobs for this project only
