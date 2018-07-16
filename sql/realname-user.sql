@@ -1,0 +1,1 @@
+select fullname from user_info.user_names where username = "%USERID%";
