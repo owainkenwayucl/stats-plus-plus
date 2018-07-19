@@ -57,9 +57,9 @@
         (setv upper (* 2 upper)) 
     )
     (print (+ service "," period))
-    (print "Category, CPU_TIME (s)")
+    (print "Category, CPU_TIME (h)")
     (for [i names]
-        (setv t  (dbtools.undecimal (get (get (get data i)0) "cpu_time")))
+        (setv t (/ (dbtools.undecimal (get (get (get data i)0) "cpu_time")) 3600))
         (print (+ i ",") t )
     )
 
