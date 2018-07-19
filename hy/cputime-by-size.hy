@@ -34,6 +34,8 @@
 ;; This is our main function.
 (defmain [&rest args]
 
+    (import dbtools)
+
     (setv service (get args 1))
     (setv period (get args 2)) ;; the month we are looking at.
 
@@ -57,7 +59,7 @@
     (print (+ service "," period))
     (print "Category, CPU_TIME (s)")
     (for [i names]
-        (setv t  (get (get (get data i)0) "cpu_time"))
+        (setv t  (dbtools.undecimal (get (get (get data i)0) "cpu_time")))
         (print (+ i ",") t )
     )
 
