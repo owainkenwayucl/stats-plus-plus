@@ -8,7 +8,7 @@
     (setv query (simpletemplate.templatefile 
                            :filename "sql/get-max-cost.sql"
                            :keys keys))
-    ;;(print query)
+
     (setv data (dbtools.dbquery :db (get keys "%DB%")
                            :query query))
     data
@@ -23,7 +23,7 @@
     (setv query (simpletemplate.templatefile 
                            :filename "sql/cputime-by-job-size.sql"
                            :keys keys))
-    ;;(print query)
+
     (setv data (dbtools.dbquery :db (get keys "%DB%")
                            :query query))
     data
@@ -37,11 +37,10 @@
     (setv service (get args 1))
     (setv period (get args 2)) ;; the month we are looking at.
 
-    ;;(print service)
+
     (setv max_cost (get (get (getmax service) 0) "max_cost"))
     
-    ;;(setv onec (getcpubetween service period 0 64))
-    ;;(print onec)
+
     (setv upper 16)
     (setv lower 0)
 
