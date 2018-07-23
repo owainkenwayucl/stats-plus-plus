@@ -82,3 +82,13 @@ def undecimal(n):
     if type(n) != type(None):
         r = float(n)
     return r
+
+# Work out which service we are on.
+def getservice():
+    import socket
+    services = ["grace", "legion", "myriad", "thomas"]
+    for a in socket.gethostbyaddr(socket.gethostname()):
+        for b in services:
+            if b in a:
+                return b
+    return "UNKNOWN"
