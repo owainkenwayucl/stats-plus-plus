@@ -17,9 +17,9 @@
 		 "python"           ["python" ".py"]
 		 "cesm"             ["cesm"]
 		 "amber"            ["amber" "pmemd" "mmpbsa"]
-		 "openfoam"         ["foam"]
+		 "openfoam"         ["foam" "snappyHexMesh"]
 		 "casino"           ["casino"]
-		 "chemshell"        ["chemshell"]
+		 "chemshell"        ["chemshell" "chemsh"]
 		 "quantum espresso" ["pw.x"]
 		 "acesim"           ["acesim"]
 		 "molpro"           ["molpro"]
@@ -30,6 +30,23 @@
 		 "cpmd"             ["cpmd"]
 		 "aims"             ["aims"]
 		 "siesta"           ["siesta"]
+		 "klmc"             ["klmc"]
+		 "phylobayes"       ["pb_mpi"]
+		 "specfem3d"        ["xspecfem3d"]
+		 "unknown code 4"   ["ensga2r"]
+		 "ramses"           ["ramses"]
+		 "gaussian"         ["g16" "g09"]
+		 "starcd/starccm"   ["star " "starccm+"]
+		 "ansys"            ["cfx5solve" "fluent" "ansysdt"]
+		 "matlab"           ["matlab"]
+		 "abaqus"           ["abaqus"]
+		 "cfd-ace"          ["cfd-solver"]
+		 "unknown code 1"   ["sgpe_lower_polariton_cont"]
+		 "unknown code 2"   ["main_code"]
+		 "unknown code 3"   ["psc_whistler"]
+		 "unknown code 5"   ["uspex"]
+		 "unknown code 6"   ["mcsqs"]
+		 "unknown code 7"   ["calypso.x"]
 		})
 
 
@@ -39,6 +56,9 @@
 		 "legion" "/var/opt/sge/shared/saved_job_scripts/"
 		 "myriad" "/var/opt/sge/shared/saved_job_scripts/"
 		})
+
+; Common starts of line that indicate the code
+(setv launchers ["export MDR" "UNRES_BIN" "chemsh" "g16" "g09" "star" "cfx5solve" "fluent" "R " "Rscript " "python" "matlab" "gmx" "USPEX" "mcsqs" "time" "./ramses2gadget" "abaqus" "CFD-SOLVER" "mdrun" "/usr/bin/time" "$HOME/bin" "${HOME}/bin" "${HOME}/src" "$HOME/src" "./calypso.x" "ansysdt"])
 
 ; Convert a job number to a filename based on the service.
 (defn setfname [service filename] (+ (get scriptloc service) filename))
@@ -50,30 +70,36 @@
 		(with [f (open filename)]
 			(try
 				(for [line f] 
-					(if (.startswith (.strip line) "export MDR")
-						(setv r line))	
-					(if (.startswith (.strip line) "UNRES_BIN")
-						(setv r line))	
 					(if (.startswith (.strip (.upper line)) "EXEC")
 						(setv r line))	
-					(if (.startswith (.strip line) "mpirun")
+					(if (in "mpirun" (.strip line))
 						(setv r line))	
-					(if (.startswith (.strip line) "gerun")
+					(if (in "mpiexec" (.strip line))
 						(setv r line))	
+					(if (in "gerun" (.strip line))
+						(setv r line))	
+					(if (in "cp2k." (.strip line))
+						(setv r line))	
+					(for [l launchers]
+						(if (.startswith (.strip line) l)
+							(setv r line)
+						)
+					)
 				)
 				(except [UnicodeDecodeError]
-					(setv r ""))
+					(do (setv r "")))
 			)
 
 		)
-		(except [FileNotFoundError] (setv r ""))
+		(except [FileNotFoundError] 
+			(do (setv r "")))
 	)
 	r
 )
 
 ; Check lowercase containment.
 (defn isx [line x]
-	(if (in x (.lower line)))
+	(if (in (.lower x) (.lower line)))
 )
 
 ; Match a line against our applications.
@@ -167,4 +193,5 @@
 		)
 		(csvout service (get args 1) (getusagebyapp service (get args 1)))
 	)
+
 )
