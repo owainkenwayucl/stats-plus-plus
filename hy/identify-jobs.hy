@@ -41,6 +41,9 @@
 		 "matlab"           ["matlab"]
 		 "abaqus"           ["abaqus"]
 		 "cfd-ace"          ["cfd-solver"]
+		 "gambit"           ["gambit"]
+		 "vampire"          ["vampire"]
+		 "conquest"         ["conquest"]
 		 "unknown code 1"   ["sgpe_lower_polariton_cont"]
 		 "unknown code 2"   ["main_code"]
 		 "unknown code 3"   ["psc_whistler"]
@@ -70,19 +73,23 @@
 		(with [f (open filename)]
 			(try
 				(for [line f] 
-					(if (.startswith (.strip (.upper line)) "EXEC")
-						(setv r line))	
-					(if (in "mpirun" (.strip line))
-						(setv r line))	
-					(if (in "mpiexec" (.strip line))
-						(setv r line))	
-					(if (in "gerun" (.strip line))
-						(setv r line))	
-					(if (in "cp2k." (.strip line))
-						(setv r line))	
-					(for [l launchers]
-						(if (.startswith (.strip line) l)
-							(setv r line)
+					(if (not (.startswith (.strip line) "#")) 
+						(do
+							(if (.startswith (.strip (.upper line)) "EXEC")
+								(setv r line))	
+							(if (in "mpirun" (.strip line))
+								(setv r line))	
+							(if (in "mpiexec" (.strip line))
+								(setv r line))	
+							(if (in "gerun" (.strip line))
+								(setv r line))	
+							(if (in "cp2k." (.strip line))
+								(setv r line))	
+							(for [l launchers]
+								(if (.startswith (.strip line) l)
+									(setv r line)
+								)
+							)
 						)
 					)
 				)
