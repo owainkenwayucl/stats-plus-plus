@@ -24,3 +24,9 @@ def getlast12months(d):
         retval[i] = temp
 
     return retval
+
+def datetoperiod(d):
+    m = str(d.month)
+    if len(m)==1:
+        m = "0"+m
+    return "" + str(d.year) + "-" + m
