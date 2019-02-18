@@ -1,0 +1,26 @@
+'''
+   This module contains routines for manipulating dates, which will be treated as a tuple of year:month.
+   Keeping this code in one place should solve the old stats problem of 32903 different incompatible 
+   implementations.
+'''
+
+import datetime
+
+
+# For reasons datetime doesn't include a sane way of subtracting a month.
+# Returns new date d.year, d.month - 1, d.day with overflows.
+def subtractmonth(d):
+    firstday = datetime.date(d.year, d.month, 1)
+    lastmonth = firstday-(datetime.timedelta(days=1))
+    retval = datetime.date(lastmonth.year, lastmonth.month,min(d.day, lastmonth.day))
+    return retval
+
+def getlast12months(d):
+    retval={}
+    temp = d
+
+    for i in range(12, 0, -1):
+        temp = subtractmonth(temp)
+        retval[i] = temp
+
+    return retval
