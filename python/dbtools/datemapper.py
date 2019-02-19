@@ -16,14 +16,18 @@ def subtractmonth(d):
     return retval
 
 def getlast12months(d):
+
+    return getlastnmonths(d,12)
+
+def getlastnmonths(d,n):
     retval={}
     temp = d
 
-    for i in range(12, 0, -1):
+    for i in range(n, 0, -1):
         temp = subtractmonth(temp)
         retval[i] = temp
 
-    return retval
+    return retval    
 
 def datetoperiod(d):
     m = str(d.month)
