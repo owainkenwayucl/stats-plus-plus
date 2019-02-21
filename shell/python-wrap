@@ -2,5 +2,5 @@
 # wrapper for python3 script
 
 # get script location
-DIR=$(dirname "$(readlink -f "${0}/../python")")
-PYTHONPATH=$DIR:$PYTHONPATH $DIR/${0}.py "$@"
+DIR=$(dirname "$(readlink -f "${0}")")
+PYTHONPATH=${DIR}/../python:${PYTHONPATH} python3 ${DIR}/../python/${0}.py "$@"
