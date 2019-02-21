@@ -34,3 +34,6 @@ def datetoperiod(d):
     if len(m)==1:
         m = "0"+m
     return "" + str(d.year) + "-" + m
+
+def fromisoformat(d):
+    return datetime.datetime.strptime(d, "%Y-%m-%d")
