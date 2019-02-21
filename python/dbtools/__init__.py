@@ -6,12 +6,15 @@
     Owain Kenway
 '''
 
+# Flag to enable debug output.
+DEBUG = False
+
 '''
     Generally abstract away DB queries, such that all complexity is replaced with:
     
         dbtools.dbquery(db, query)
 '''
-def dbquery(db, query, mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlport = 3306 ):
+def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlport = 3306 ):
     from auth.secrets import Secrets
     import mysql.connector # Use the "official" MySQL connector
 
@@ -29,7 +32,8 @@ def dbquery(db, query, mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlport = 
     cursor = conn.cursor(dictionary=True)
 
     # Debug line.
-    # print(">>> DEBUG SQL query: " + query)
+    if DEBUG:
+        print(">>> DEBUG SQL query: " + query)
 
     # Run query.
     cursor.execute(query)
