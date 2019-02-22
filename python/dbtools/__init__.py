@@ -21,6 +21,7 @@ def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlp
     from auth.secrets import Secrets
     import mysql.connector # Use the "official" MySQL connector
     import datetime
+    import sys
 
     # Set up our authentication.
     s = Secrets()
@@ -37,7 +38,7 @@ def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlp
 
     # Debug line.
     if DEBUG:
-        print(">>> DEBUG SQL query: " + query)
+        sys.stderr.write(">>> DEBUG SQL query: " + query + "\n")
 
     # Timing.
     starttime=datetime.datetime.now()
@@ -51,7 +52,7 @@ def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlp
     # Timing.
     endtime=datetime.datetime.now()
     if DEBUG: 
-        print(">>> DEBUG Time taken: " + str(endtime - starttime))
+        sys.stderr.write(">>> DEBUG Time taken: " + str(endtime - starttime) + "\n")
 
     # Tidy up.
     cursor.close()
