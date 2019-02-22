@@ -2,13 +2,15 @@
    Tool to generate historical usage by faculty.
 '''
 
-def genfacstats(service, today, sep='|', nmonths=12):
+def genfacstats(service, today, sep='|', nmonths=12, DEBUG=False):
     import dbtools.facultymapper as fm 
     import dbtools.datemapper as dm
     import dbtools as dbt
     import simpletemplate as st 
     import datetime
     import sys
+
+    dbt.DEBUG = DEBUG
 
     # Get the latest faculty map.
     fmap = fm.getmap()
@@ -48,12 +50,14 @@ if __name__ == '__main__':
     today = datetime.date.today()
     sep = "|"
     nmonths = 12
+    DEBUG=False 
 
     parser = argparse.ArgumentParser(description="Generate CSV of faculty use for 12 months.")
     parser.add_argument('-d', metavar='date', type=str, help="Date to count back from.")
     parser.add_argument('-s', metavar='sep', type=str, help="CSV seperator (default: |)")
     parser.add_argument('-c', metavar='cluster', type=str, help="Cluster to generate stats for (default: grace)")
     parser.add_argument('-m', metavar='months', type=int, help="Number of months to count back (default: 12)")
+    parser.add_argument('-v', action='store_true', help='Print out debugging info.')
 
     args = parser.parse_args()
 
@@ -69,4 +73,7 @@ if __name__ == '__main__':
     if args.m != None:
         nmonths=args.m
 
-    genfacstats(service, today, sep, nmonths)
+    if args.v == True:
+        DEBUG = True
+
+    genfacstats(service, today, sep, nmonths, DEBUG)

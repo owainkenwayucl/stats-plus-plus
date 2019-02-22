@@ -20,6 +20,7 @@ SERVICE_DB = {"grace":"grace_sgelogs", "legion":"sgelogs2", "myriad":"myriad_sge
 def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlport = 3306 ):
     from auth.secrets import Secrets
     import mysql.connector # Use the "official" MySQL connector
+    import datetime
 
     # Set up our authentication.
     s = Secrets()
@@ -38,11 +39,19 @@ def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlp
     if DEBUG:
         print(">>> DEBUG SQL query: " + query)
 
+    # Timing.
+    starttime=datetime.datetime.now()
+
     # Run query.
     cursor.execute(query)
 
     # Dump output.
     output = cursor.fetchall()
+
+    # Timing.
+    endtime=datetime.datetime.now()
+    if DEBUG: 
+        print(">>> DEBUG Time taken: " + str(endtime - starttime))
 
     # Tidy up.
     cursor.close()
