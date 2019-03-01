@@ -44,6 +44,7 @@ def genfacstats(service, today, sep='|', nmonths=12, DEBUG=False):
 if __name__ == '__main__':
     import argparse
     import datetime
+    import dbtools.datemapper as dm
 
     # Default values
     service="grace"
@@ -62,7 +63,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.d != None:
-        today = args.d
+        today = dm.fromisoformat(args.d)
 
     if args.s != None:
         sep = args.s
