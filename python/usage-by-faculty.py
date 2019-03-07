@@ -32,13 +32,22 @@ def genfacstats(service, today, sep='|', nmonths=12, DEBUG=False):
     # we need to loop over faculties and dates, querying to get the sum for each period.
     for f in sorted(fmap.keys()):
         print(f, end=sep)
+        usage = {}
+        d = dbt.sqllist(fmap[f])
+        keys = {'%DB%':service_db, '%DEPARTMENT%':d}
+        query = st.templatefile(filename="sql/facultyusage.sql", keys=keys)
+        results = dbt.dbquery(db=keys['%DB%'], query=query)
+       
         for i in range(1,nmonths+1):
-            total = 0
-            for d in fmap[f]:
-                keys = {'%DB%':service_db, '%PERIOD%':dm.datetoperiod(months[i]), '%DEPARTMENT%':d}
-                query = st.templatefile(filename="sql/time-by-dept.sql", keys=keys)
-                total = total + (dbt.undecimal(dbt.dbquery(db=keys['%DB%'], query=query)[0]['SUM(cost*run_time)']))
-            print(total, end=sep)
+            txtdate=dm.datetoperiod(months[i])
+            usage[txtdate] = 0
+            for j in results:
+                if j["Period"] == txtdate:
+                    usage[txtdate] = dbt.undecimal(j["Total CPU Time Usage"])
+
+        for i in range(1,nmonths+1):
+            txtdate=dm.datetoperiod(months[i])
+            print(usage[txtdate], end=sep)
         print("")
 
 if __name__ == '__main__':

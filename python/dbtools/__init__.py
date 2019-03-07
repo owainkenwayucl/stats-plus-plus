@@ -65,12 +65,12 @@ def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlp
 def sqllist(pylist):
     sqlstr="("
     if type(pylist) == str:
-        sqlstr = sqlstr + "'" + pylist + "')"
+        sqlstr = sqlstr + '"' + pylist + '")'
     else:
         for a in pylist:
             if sqlstr!= "(":
                 sqlstr = sqlstr + ", "
-            sqlstr = sqlstr + "'" + a + "'"
+            sqlstr = sqlstr + '"' + a + '"'
         sqlstr = sqlstr + ")"
     return sqlstr
 
