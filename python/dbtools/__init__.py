@@ -21,7 +21,7 @@ def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlp
     from auth.secrets import Secrets
     import mysql.connector # Use the "official" MySQL connector
     import datetime
-    import sys
+    #import sys
 
     # Set up our authentication.
     s = Secrets()
@@ -38,7 +38,7 @@ def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlp
 
     # Debug line.
     if DEBUG:
-        sys.stderr.write(">>> DEBUG SQL query: " + query + "\n")
+        log(query, "SQL query")
 
     # Timing.
     starttime=datetime.datetime.now()
@@ -52,13 +52,29 @@ def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlp
     # Timing.
     endtime=datetime.datetime.now()
     if DEBUG: 
-        sys.stderr.write(">>> DEBUG Time taken: " + str(endtime - starttime) + "\n")
+        log(str(endtime - starttime), "Time taken")
 
     # Tidy up.
     cursor.close()
     conn.close()
 
     return output
+
+# Routine for "pretty" logging.
+def log(s, t=""):
+    import sys
+
+    lines = s.splitlines()
+
+    if len(t) > 0:
+        t = " " + t
+
+    if len(lines) ==  1:
+        sys.stderr.write(">>> DEBUG" + t + ": " + s + "\n")
+    else:
+        sys.stderr.write(">>> DEBUG" + t + ":\n")
+        for line in lines:
+            sys.stderr.write("... " + line + "\n")
 
 
 # Generate a valid SQL list from a python one.
