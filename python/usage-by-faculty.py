@@ -56,7 +56,7 @@ def genfacstats(service, today, sep='|', nmonths=12, DEBUG=False):
     # Timing.
     endtime=datetime.datetime.now()
     if DEBUG: 
-        dbt.log(str(endtime - starttime), "Time taken to generate faculty usage report.")
+        dbt.log(str(endtime - starttime), "Time taken to generate faculty usage report")
 
 if __name__ == '__main__':
     import argparse
