@@ -31,8 +31,7 @@ def genfacstats(service, today, sep='|', nmonths=12, DEBUG=False):
         print(dm.datetoperiod(months[i]), end=sep)
     print("")
 
-
-    # we need to loop over faculties and dates, querying to get the sum for each period.
+    # we need to loop over faculties, querying to get the sum for each period.
     for f in sorted(fmap.keys()):
         print(f, end=sep)
         usage = {}
