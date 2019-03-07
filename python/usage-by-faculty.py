@@ -12,6 +12,9 @@ def genfacstats(service, today, sep='|', nmonths=12, DEBUG=False):
 
     dbt.DEBUG = DEBUG
 
+    # Timing.
+    starttime=datetime.datetime.now()
+
     # Get the latest faculty map.
     fmap = fm.getmap()
 
@@ -49,6 +52,11 @@ def genfacstats(service, today, sep='|', nmonths=12, DEBUG=False):
             txtdate=dm.datetoperiod(months[i])
             print(usage[txtdate], end=sep)
         print("")
+
+    # Timing.
+    endtime=datetime.datetime.now()
+    if DEBUG: 
+        dbt.log(str(endtime - starttime), "Time taken to generate faculty usage report.")
 
 if __name__ == '__main__':
     import argparse
