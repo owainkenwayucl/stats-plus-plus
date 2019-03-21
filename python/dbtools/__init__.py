@@ -17,7 +17,7 @@ SERVICE_DB = {"grace":"grace_sgelogs", "legion":"sgelogs2", "myriad":"myriad_sge
     
         dbtools.dbquery(db, query)
 '''
-def dbquery(db="", query="", mysqlhost="mysql.external.legion.ucl.ac.uk", mysqlport = 3306 ):
+def dbquery(db="", query="", mysqlhost="mysql.rc.ucl.ac.uk", mysqlport = 3306 ):
     from auth.secrets import Secrets
     import mysql.connector # Use the "official" MySQL connector
     import datetime
