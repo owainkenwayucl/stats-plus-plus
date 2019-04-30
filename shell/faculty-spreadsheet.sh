@@ -3,7 +3,7 @@
 set -e
 
 if [ "$#" = "2" ]; then
-  ./usage-by-faculty -c ${1} -d ${2}-01 > facultyin.csv
+  ./usage-by-faculty -c ${1} -d ${2}-01 -v > facultyin.csv
   ./miscellc -i miscell/facultyskeleton.mcl -o ${1}-${2}.csv
   rm facultyin.csv
 else
