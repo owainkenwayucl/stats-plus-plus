@@ -1,4 +1,4 @@
-all: time-by-cost-by-inst time-by-cost-by-inst-user unique-users-over-all-time usage-by-faculty usage-by-department miscellc
+all: dept-users time-by-cost-by-inst time-by-cost-by-inst-user unique-users-over-all-time usage-by-faculty usage-by-department miscellc
 
 time-by-cost-by-inst:
 	ln -s shell/r-wrap time-by-cost-by-inst
@@ -17,5 +17,9 @@ usage-by-department:
 
 miscellc:
 	ln -s shell/python-wrap miscellc
+
+dept-users:
+	ln -s shell/python-wrap dept-users
+
 clean:
-	rm time-by-cost-by-inst time-by-cost-by-inst-user unique-users-over-all-time usage-by-faculty usage-by-department miscellc
+	rm time-by-cost-by-inst time-by-cost-by-inst-user unique-users-over-all-time usage-by-faculty usage-by-department miscellc dept-users
