@@ -119,7 +119,7 @@ def undecimal(n):
 # Work out which service we are on.
 def getservice():
     import socket
-    services = ["grace", "legion", "myriad", "thomas"]
+    services = ["grace", "legion", "myriad", "thomas", "kathleen"]
     for a in socket.gethostbyaddr(socket.gethostname()):
         for b in services:
             if b in a:
