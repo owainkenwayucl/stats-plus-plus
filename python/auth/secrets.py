@@ -34,23 +34,22 @@ class Secrets:
             self.adsource = 2
         
         # Then check to see if we have a ~/.adpw as for the ClusterStats repo.
-        elif os.path.exists(os.path.expanduser("~/.adpw")):
+        elif os.path.exists(os.path.join(os.path.expanduser("~"), ".adpw")):
             self.aduser = "AD\sa-ritsldap01"
             
-            with open(os.path.expanduser("~/.adpw")) as f:
+            with open(os.path.join(os.path.expanduser("~"), ".adpw")) as f:
                 self.passwd = f.read().strip()
             self.ad = True
             self.adsource = 3
 
+
         # Then check to see if we have a system-wide password.
-        elif os.path.exists("/shared/ucl/etc/adpw"):
+        elif os.path.exists(os.path.join(os.sep, "shared", "ucl", "etc", "adpw")):
             self.aduser = "AD\sa-ritsldap01"
             
-            with open("/shared/ucl/etc/adpw") as f:
-                self.passwd= f.read().strip()
+            with open(os.path.join(os.sep, "shared", "ucl", "etc", "adpw")) as f:
+                self.passwd = f.read().strip()
             self.ad = True
             self.adsource = 4
-
-
 
         
