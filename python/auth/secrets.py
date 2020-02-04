@@ -18,17 +18,20 @@ class Secrets:
 
         # See if we have an AD password available to us anywhere:
         self.ad = False
+        self.adsource = 0
 
         # First check our config file for "ad" or "ldap" sections.
         if secretconfig.has_section("ad"):
             self.aduser = secretconfig.get("ad", "user").strip("'")
             self.adpasswd = secretconfig.get("ad", "pass").strip("")
             self.ad = True
+            self.adsource = 1
         
         elif secretconfig.has_section("ldap"):
             self.aduser = secretconfig.get("ldap", "user").strip("'")
             self.adpasswd = secretconfig.get("ldap", "pass").strip("")
             self.ad = True
+            self.adsource = 2
         
         # Then check to see if we have a ~/.adpw as for the ClusterStats repo.
         elif os.path.exists(os.path.expanduser("~/.adpw")):
@@ -37,6 +40,7 @@ class Secrets:
             with open(os.path.expanduser("~/.adpw")) as f:
                 self.passwd = f.read().strip()
             self.ad = True
+            self.adsource = 3
 
         # Then check to see if we have a system-wide password.
         elif os.path.exists("/shared/ucl/etc/adpw"):
@@ -45,6 +49,7 @@ class Secrets:
             with open("/shared/ucl/etc/adpw") as f:
                 self.passwd= f.read().strip()
             self.ad = True
+            self.adsource = 4
 
 
 
