@@ -19,6 +19,7 @@ def getlast12months(d):
 
     return getlastnmonths(d,12)
 
+# NOTE Keys are accidentally sorted in reverse order!
 def getlastnmonths(d,n):
     retval={}
     temp = d
@@ -27,7 +28,7 @@ def getlastnmonths(d,n):
         temp = subtractmonth(temp)
         retval[i] = temp
 
-    return retval    
+    return retval
 
 def datetoperiod(d):
     m = str(d.month)

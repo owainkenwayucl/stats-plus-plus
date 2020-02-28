@@ -33,7 +33,7 @@ def gendeptstats(service, today, sep='|', nmonths=12, DEBUG=False):
 
     for a in departments:
         print(a, end=sep)
-        for b in months.keys():
+        for b in range(1,nmonths+1):
             d=False
             for c in results:
                 if c["Department"] == a and c["Period"] == dm.datetoperiod(months[b]):
