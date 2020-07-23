@@ -38,7 +38,7 @@ class Secrets:
             self.aduser = "AD\sa-ritsldap01"
             
             with open(os.path.join(os.path.expanduser("~"), ".adpw")) as f:
-                self.passwd = f.read().strip()
+                self.adpasswd = f.read().strip()
             self.ad = True
             self.adsource = 3
 
@@ -48,7 +48,7 @@ class Secrets:
             self.aduser = "AD\sa-ritsldap01"
             
             with open(os.path.join(os.sep, "shared", "ucl", "etc", "adpw")) as f:
-                self.passwd = f.read().strip()
+                self.adpasswd = f.read().strip()
             self.ad = True
             self.adsource = 4
 
