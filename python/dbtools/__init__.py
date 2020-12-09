@@ -10,7 +10,7 @@
 DEBUG = False
 
 # Map servicenames to db names.
-SERVICE_DB = {"kathleen":"kathleen_sgelogs","grace":"grace_sgelogs", "legionold":"sgelogs2", "legion":"legion_sgelogs", "myriad":"myriad_sgelogs", "thomas":"thomas_sgelogs", "michael":"michael_sgelogs"}
+SERVICE_DB = {"kathleen":"kathleen_sgelogs","grace":"grace_sgelogs", "legionold":"sgelogs2", "legion":"legion_sgelogs", "myriad":"myriad_sgelogs", "thomas":"thomas_sgelogs", "michael":"michael_sgelogs", "young":"young_sgelogs"}
 
 '''
     Generally abstract away DB queries, such that all complexity is replaced with:
