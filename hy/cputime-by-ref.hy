@@ -122,7 +122,7 @@
 
 	(setv refcat (getrefcats debug)) 
 
-	(if (!= None args.r) (if (= "arts" args.r) (setv refcat artrefcat)) (setv refcat (json.loads args.r)))
+	(if (!= None args.r) (if (= "arts" args.r) (setv refcat artrefcat) (setv refcat (json.loads args.r))))
 
 	(setv monthlist (dbtools.datemapper.getlastnmonths current nmonths))
 
