@@ -85,7 +85,7 @@
 					:type int
 					:help "Number of months to count back default: 36)")
 	(parser.add_argument "-r"	:metavar "refcats"
-					:type int
+					:type str
 					:help "JSON formatted list of REF categories")
 
 	(parser.add_argument "-v" 	:action "store_true"
