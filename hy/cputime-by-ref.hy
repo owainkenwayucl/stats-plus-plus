@@ -1,3 +1,5 @@
+;; Generate usage for arbitrary ref categories on a service over time.
+
 (defn getusageref [service monthlist refs debug] 
 	(import simpletemplate)
 	(import dbtools)
@@ -6,7 +8,7 @@
 
 	(setv reflist (dbtools.sqllist refs))
 
-	(setv keys {"%DB%" (+ service "_sgelogs") "%PERIOD%" "2021-01" "%REFCAT%" reflist})
+	(setv keys {"%DB%" (+ service "_sgelogs") "%REFCAT%" reflist})
 	(setv query (simpletemplate.templatefile
 				:filename "sql/cputime-for-refs.sql"
 				:keys keys))
