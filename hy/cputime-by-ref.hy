@@ -21,12 +21,14 @@
 	data
 )
 
-(defn printCSV [monthlist refs data seperator nmonths] 
+(defn printCSV [monthlist refs data seperator debug] 
 	(import simpletemplate)
 	(import dbtools)
 	(import dbtools.datemapper)
 
-	(print ">>> CSV:")
+	(setv nmonths (len monthlist))
+
+	(if debug (print ">>> CSV:"))
 	(print "Ref Category" seperator :end "")
 	(for [a refs]
 		(print a :end seperator)
@@ -47,7 +49,6 @@
 		(print "")
 
 	)
-	(print (len monthlist))
 )
 
 
@@ -63,9 +64,10 @@
 	(setv current (dbtools.datemapper.fromisoformat "2021-02-01"))
 	(setv monthlist (dbtools.datemapper.getlastnmonths current nmonths))
 	(setv seperator " | ")
+	(setv debug True)
 
-	(setv data (getusageref platform monthlist artrefcat True))
-	(printCSV monthlist artrefcat data seperator nmonths)
+	(setv data (getusageref platform monthlist artrefcat debug))
+	(printCSV monthlist artrefcat data seperator debug)
 
 )
 
