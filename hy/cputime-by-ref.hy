@@ -55,6 +55,7 @@
 	(import dbtools.datemapper)
 	(import argparse)
 	(import datetime)
+	(import json)
 
 
 ;; Defaults
@@ -83,6 +84,9 @@
 	(parser.add_argument "-m"	:metavar "months"
 					:type int
 					:help "Number of months to count back default: 36)")
+	(parser.add_argument "-r"	:metavar "refcats"
+					:type int
+					:help "JSON formatted list of REF categories")
 
 	(parser.add_argument "-v" 	:action "store_true"
 				  	:help "Print out debugging information")
@@ -94,6 +98,7 @@
 	(if (!= None args.s) (setv seperator args.s))
 	(if (!= None args.c) (setv platform args.c))
 	(if (!= None args.m) (setv nmonths args.m))
+	(if (!= None args.r) (setv artrefcat (json.loads args.r)))
 
 	(if args.v (setv debug True))
 
