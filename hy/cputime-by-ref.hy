@@ -8,7 +8,9 @@
 
 	(setv reflist (dbtools.sqllist refs))
 
-	(setv keys {"%DB%" (+ service "_sgelogs") "%REFCAT%" reflist})
+	(setv servicedb (get dbtools.SERVICE_DB (.lower service)))
+
+	(setv keys {"%DB%" servicedb "%REFCAT%" reflist})
 	(setv query (simpletemplate.templatefile
 				:filename "sql/cputime-for-refs.sql"
 				:keys keys))
