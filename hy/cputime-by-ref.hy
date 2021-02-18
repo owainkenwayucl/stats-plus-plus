@@ -68,7 +68,7 @@
 	(for [a data] 
 		(.append retval (get a "ref_category"))
 	)
-	(if debug (dbtools.log (str retval) "Categories found:"))
+	(if debug (dbtools.log (str retval) "Categories found"))
 	retval
 )
 
