@@ -6,8 +6,8 @@
 
 (setv platform "myriad")
 (setv refcat ["Law" "Communication, Cultural and Media Studies, Library and Information Management" "Modern Languages and Linguistics" "Philosophy" "Politics and International Studies"])
-(setv nmonths 60)
-(setv current (dbtools.datemapper.fromisoformat "2021-01-01"))
+(setv nmonths 36)
+(setv current (dbtools.datemapper.fromisoformat "2021-02-01"))
 (setv monthlist (dbtools.datemapper.getlastnmonths current nmonths))
 (setv seperator " | ")
 (dbtools.log (str monthlist) "Months")
