@@ -131,7 +131,7 @@
 	(setv monthlist (dbtools.datemapper.getlastnmonths current nmonths))
 
 	(setv data (getusageref platform monthlist refcat debug))
-	(printCSV monthlist artrefcat data seperator debug)
+	(printCSV monthlist refcat data seperator debug)
 
 )
 
