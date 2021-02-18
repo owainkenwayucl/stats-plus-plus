@@ -6,7 +6,7 @@
 	(import dbtools.datemapper)
 	(setv dbtools.DEBUG debug)
 
-	(setv reflist (dbtools.sqllist refcat))
+	(setv reflist (dbtools.sqllist refs))
 
 	(setv keys {"%DB%" (+ service "_sgelogs") "%PERIOD%" "2021-01" "%REFCAT%" reflist})
 	(setv query (simpletemplate.templatefile
@@ -28,7 +28,7 @@
 
 	(print ">>> CSV:")
 	(print "Ref Category" seperator :end "")
-	(for [a refcat]
+	(for [a refs]
 		(print a :end seperator)
 	)
 	(print "")
@@ -37,7 +37,7 @@
 		(setv index (+ i 1))
 		(setv pperiod (dbtools.datemapper.datetoperiod (get monthlist index)))
 		(print pperiod :end seperator)
-		(for [a refcat]
+		(for [a refs]
           		(setv value 0.0)
           		(for [b data]
 				(if (and (= (get b "Period") pperiod) (= (get b "ref_category") a)) (setv value(get b "Total CPU Time Usage")))
