@@ -1,5 +1,3 @@
-;(dbtools.log (str monthlist) "Months")
-
 (defn getusageref [service monthlist refs debug] 
 	(import simpletemplate)
 	(import dbtools)
@@ -55,8 +53,11 @@
 ;; This is our main function.
 (defmain [&rest args]
 	(import dbtools.datemapper)
+	(import argparse)
+	(import datetime)
 
 
+;; Defaults
 	(setv platform "myriad")
 	(setv artrefcat ["Education" "Business and Management Studies" "Politics and International Studies" "Sociology" "Economics and Econometrics" "Philosophy" "Modern Languages and Linguistics" "Communication, Cultural and Media Studies, Library and Information Management" "Law" "Geography, Environmental Studies and Archaeology" "Psychology, Psychiatry and Neuroscience" "Architecture, Built Environment and Planning"])
 
@@ -64,7 +65,15 @@
 	(setv current (dbtools.datemapper.fromisoformat "2021-02-01"))
 	(setv monthlist (dbtools.datemapper.getlastnmonths current nmonths))
 	(setv seperator " | ")
-	(setv debug True)
+	(setv debug False)
+
+	(setv parser (argparse.ArgumentParser :description "Generate CPU usage for a named list of REF categories."))
+
+	(parser.add_argument "-v" :action "store_true"
+				  :help "Print out debugging information")
+
+	(setv args (parser.parse_args))
+	(if args.v (setv debug True))
 
 	(setv data (getusageref platform monthlist artrefcat debug))
 	(printCSV monthlist artrefcat data seperator debug)
