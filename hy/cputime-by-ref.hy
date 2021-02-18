@@ -57,7 +57,7 @@
 
 	(setv query (simpletemplate.templatefile
 		:filename "sql/refcats.sql"
-                :keys "")
+                :keys {})
 
 	)
 	(setv data (dbtools.dbquery 	
