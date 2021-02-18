@@ -7,4 +7,4 @@ RIGHT JOIN user_info.user_refcats 	AS ref_cat_table
     ON t1.owner = ref_cat_table.username 
     WHERE end_time > start_time
     AND ref_cat_table.ref_category IN %REFCAT%
-    GROUP BY end_period;
+    GROUP BY end_period, ref_cat_table.ref_category;
