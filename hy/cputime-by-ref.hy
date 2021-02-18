@@ -47,6 +47,7 @@
 		(print "")
 
 	)
+	(print (len monthlist))
 )
 
 
