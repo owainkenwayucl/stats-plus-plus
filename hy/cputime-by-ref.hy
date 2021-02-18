@@ -83,10 +83,10 @@
 
 	(parser.add_argument "-m"	:metavar "months"
 					:type int
-					:help "Number of months to count back default: 36)")
+					:help "Number of months to count back (default: 36)")
 	(parser.add_argument "-r"	:metavar "refcats"
 					:type str
-					:help "JSON formatted list of REF categories")
+					:help "JSON formatted list of REF categories (default: list of Arts and Humanities REF categories)")
 
 	(parser.add_argument "-v" 	:action "store_true"
 				  	:help "Print out debugging information")
