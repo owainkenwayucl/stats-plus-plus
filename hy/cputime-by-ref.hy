@@ -63,7 +63,7 @@
 	(setv monthlist (dbtools.datemapper.getlastnmonths current nmonths))
 	(setv seperator " | ")
 
-	(setv data (getusagedata platform monthlist artrefcat True))
+	(setv data (getusageref platform monthlist artrefcat True))
 	(printCSV monthlist artrefcat data)
 
 )
