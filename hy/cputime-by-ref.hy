@@ -90,7 +90,7 @@
 
 	(setv args (parser.parse_args))
 
-	(if (!= None args.d) (setv current dbtools.datemapper.fromisoformat(args.d)))
+	(if (!= None args.d) (setv current (dbtools.datemapper.fromisoformat args.d)))
 	(if (!= None args.s) (setv seperator args.s))
 	(if (!= None args.c) (setv platform args.c))
 	(if (!= None args.m) (setv nmonths args.m))
