@@ -21,7 +21,7 @@
 	data
 )
 
-(defn printCSV [monthlist refs data seperator] 
+(defn printCSV [monthlist refs data seperator nmonths] 
 	(import simpletemplate)
 	(import dbtools)
 	(import dbtools.datemapper)
@@ -64,7 +64,7 @@
 	(setv seperator " | ")
 
 	(setv data (getusageref platform monthlist artrefcat True))
-	(printCSV monthlist artrefcat data seperator)
+	(printCSV monthlist artrefcat data seperator nmonths)
 
 )
 
