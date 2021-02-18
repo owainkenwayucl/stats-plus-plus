@@ -8,13 +8,14 @@
 
 	(setv keys {"%DB%" (+ service "_sgelogs") "%PERIOD%" "2021-01" "%REFCAT%" reflist})
 	(setv query (simpletemplate.templatefile
-                           :filename "sql/cputime-for-refs.sql"
-                           :keys keys))
+				:filename "sql/cputime-for-refs.sql"
+				:keys keys))
 
 
 
-	(setv data (dbtools.dbquery :db (get keys "%DB%")
-                           :query query))
+	(setv data (dbtools.dbquery 
+				:db (get keys "%DB%")
+				:query query))
 
 	data
 )
@@ -49,6 +50,23 @@
 	)
 )
 
+(defn getrefcats [debug]
+	(import simpletemplate)
+	(import dbtools)
+	(setv dbtools.DEBUG debug)
+
+	(setv query (simpletemplate.templatefile
+		:filename "sql/refcats.sql"
+                :keys "")
+
+	)
+	(setv data (dbtools.dbquery 	
+				:db "user_info"
+                           	:query query))
+
+	
+	data
+)
 
 ;; This is our main function.
 (defmain [&rest args]
@@ -61,6 +79,7 @@
 ;; Defaults
 	(setv platform "myriad")
 	(setv artrefcat ["Education" "Business and Management Studies" "Politics and International Studies" "Sociology" "Economics and Econometrics" "Philosophy" "Modern Languages and Linguistics" "Communication, Cultural and Media Studies, Library and Information Management" "Law" "Geography, Environmental Studies and Archaeology" "Psychology, Psychiatry and Neuroscience" "Architecture, Built Environment and Planning"])
+
 
 	(setv nmonths 36)
 	(setv current (datetime.date.today))
@@ -94,19 +113,20 @@
 
 	(setv args (parser.parse_args))
 
+	(if args.v (setv debug True))
+
 	(if (!= None args.d) (setv current (dbtools.datemapper.fromisoformat args.d)))
 	(if (!= None args.s) (setv seperator args.s))
 	(if (!= None args.c) (setv platform args.c))
 	(if (!= None args.m) (setv nmonths args.m))
-	(if (!= None args.r) (setv artrefcat (json.loads args.r)))
 
-	(if args.v (setv debug True))
+	(setv refcat (getrefcats debug)) 
 
-
+	(if (!= None args.r) (if (= "arts" args.r) (setv refcat artrefcat)) (setv refcat (json.loads args.r)))
 
 	(setv monthlist (dbtools.datemapper.getlastnmonths current nmonths))
 
-	(setv data (getusageref platform monthlist artrefcat debug))
+	(setv data (getusageref platform monthlist refcat debug))
 	(printCSV monthlist artrefcat data seperator debug)
 
 )
