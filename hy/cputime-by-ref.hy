@@ -62,18 +62,44 @@
 	(setv artrefcat ["Education" "Business and Management Studies" "Politics and International Studies" "Sociology" "Economics and Econometrics" "Philosophy" "Modern Languages and Linguistics" "Communication, Cultural and Media Studies, Library and Information Management" "Law" "Geography, Environmental Studies and Archaeology" "Psychology, Psychiatry and Neuroscience" "Architecture, Built Environment and Planning"])
 
 	(setv nmonths 36)
-	(setv current (dbtools.datemapper.fromisoformat "2021-02-01"))
-	(setv monthlist (dbtools.datemapper.getlastnmonths current nmonths))
-	(setv seperator " | ")
+	(setv current (datetime.date.today))
+	(setv seperator "|")
 	(setv debug False)
 
 	(setv parser (argparse.ArgumentParser :description "Generate CPU usage for a named list of REF categories."))
 
-	(parser.add_argument "-v" :action "store_true"
-				  :help "Print out debugging information")
+	(parser.add_argument "-d" 	:metavar "date"
+				  	:type str
+				  	:help "Date to cound back from (default: today)")
+
+	(parser.add_argument "-s" 	:metavar "seperator"
+					:type str
+					:help "CSV seperator (default |)")
+
+	(parser.add_argument "-c"	:metavar "cluster"
+					:type str
+					:help "Cluster (default: myriad)")
+
+	(parser.add_argument "-m"	:metavar "months"
+					:type int
+					:help "Number of months to count back default: 36)")
+
+	(parser.add_argument "-v" 	:action "store_true"
+				  	:help "Print out debugging information")
+
 
 	(setv args (parser.parse_args))
+
+	(if (!= None args.d) (setv current dbtools.datemapper.fromisoformat(args.d)))
+	(if (!= None args.s) (setv seperator args.s))
+	(if (!= None args.c) (setv platform args.c))
+	(if (!= None args.m) (setv nmonths args.m))
+
 	(if args.v (setv debug True))
+
+
+
+	(setv monthlist (dbtools.datemapper.getlastnmonths current nmonths))
 
 	(setv data (getusageref platform monthlist artrefcat debug))
 	(printCSV monthlist artrefcat data seperator debug)
