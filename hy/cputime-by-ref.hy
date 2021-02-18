@@ -11,7 +11,7 @@
 (setv current (dbtools.datemapper.fromisoformat "2021-02-01"))
 (setv monthlist (dbtools.datemapper.getlastnmonths current nmonths))
 (setv seperator " | ")
-(dbtools.log (str monthlist) "Months")
+;(dbtools.log (str monthlist) "Months")
 
 (setv reflist (dbtools.sqllist refcat))
 
@@ -25,9 +25,9 @@
 (setv data (dbtools.dbquery :db (get keys "%DB%")
                            :query query))
 
-(print ">>> DEBUG Raw Data:")
-(print data)
-(print "")
+;(print ">>> DEBUG Raw Data:")
+;(print data)
+;(print "")
 
 (print ">>> CSV:")
 (print "Ref Category" seperator :end "")
