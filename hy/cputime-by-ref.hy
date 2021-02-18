@@ -64,8 +64,12 @@
 				:db "user_info"
                            	:query query))
 
-	
-	data
+	(setv retval [])
+	(for [a data] 
+		(.append retval (get a "ref_category"))
+	)
+	(print retval)
+	retval
 )
 
 ;; This is our main function.
