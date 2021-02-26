@@ -1,4 +1,4 @@
-all: dept-users time-by-cost-by-inst time-by-cost-by-inst-user unique-users-over-all-time usage-by-faculty usage-by-department miscellc cputime
+all: dept-users time-by-cost-by-inst time-by-cost-by-inst-user unique-users-over-all-time usage-by-faculty usage-by-department miscellc cputime cputime-by-ref
 
 time-by-cost-by-inst:
 	ln -s shell/r-wrap time-by-cost-by-inst
@@ -24,5 +24,8 @@ dept-users:
 cputime:
 	ln -s shell/python-wrap cputime
 
+cputime-by-ref:
+	ln -s shell/hy-wrap cputime-by-ref
+
 clean:
-	rm time-by-cost-by-inst time-by-cost-by-inst-user unique-users-over-all-time usage-by-faculty usage-by-department miscellc dept-users cputime
+	rm time-by-cost-by-inst time-by-cost-by-inst-user unique-users-over-all-time usage-by-faculty usage-by-department miscellc dept-users cputime cputime-by-ref
