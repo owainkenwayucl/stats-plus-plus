@@ -1,0 +1,6 @@
+#!/bin/bash 
+# wrapper for hy script
+
+# get script location
+DIR=$(dirname "$(readlink -f "${0}")")
+PYTHONPATH=${DIR}/../python:${PYTHONPATH} hy ${DIR}/../hy/${0}.hy "$@"
