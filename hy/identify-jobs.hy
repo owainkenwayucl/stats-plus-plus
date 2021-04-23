@@ -68,6 +68,7 @@
 		"legion" "/var/opt/sge/shared/saved_job_scripts/"
 		"myriad" "/var/opt/sge/shared/saved_job_scripts/"
 		"kathleen" "/var/opt/sge/shared/saved_job_scripts/"
+                "young" "/var/opt/sge/shared/saved_job_scripts/"
 		})
 
 ; Common starts of line that indicate the code
