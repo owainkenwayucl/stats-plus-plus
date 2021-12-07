@@ -3,7 +3,7 @@
 
 ; List of fingerprints for known apps.
 (setv binaries { 
-		"lammps"           ["lmp"]
+		"lammps"           ["lmp" "lammps"]
 		"vasp"             ["vasp"]
 		"gromacs"          ["mdrun" "gmx"]
 		"namd"             ["namd2"]
@@ -13,14 +13,16 @@
 		"nwchem"           ["nwchem"]
 		"dlpoly"           ["dlpoly"]
 		"crystal"          ["cry14" "cry17"]
+		"crystalpredictor" ["CrystPred"]
 		"gamess"           ["gamess"]
 		"python"           ["python" ".py"]
 		"cesm"             ["cesm"]
 		"amber"            ["amber" "pmemd" "mmpbsa"]
 		"openfoam"         ["foam" "snappyHexMesh"]
+		"octopus"          ["$Oct" "OCTO_EXEC" "octopus"]
 		"casino"           ["casino"]
 		"chemshell"        ["chemshell" "chemsh"]
-		"quantum espresso" ["pw.x" "neb.x"]
+		"quantum espresso" ["pw.x" "ph.x" "neb.x" "bands.x"]
 		"acesim"           ["acesim"]
 		"molpro"           ["molpro"]
 		"xmds"             ["xmds"]
@@ -29,6 +31,7 @@
 		"mitgcmuv"         ["mitgcmuv"]
 		"cpmd"             ["cpmd"]
 		"aims"             ["aims"]
+		"cspy"             ["csp"]
 		"siesta"           ["siesta"]
 		"klmc"             ["klmc"]
 		"phylobayes"       ["pb_mpi"]
@@ -59,6 +62,9 @@
 		"unknown code 8"   ["run_solver"]
 		"unknown code 9"   ["abinit"]
 		"unknown code 10"  ["dynamic.x"]
+		"yambo"            ["yambo"]
+		"dftb+"            ["dftb+"]
+		"taskfarmer"       ["taskfarmer"]
 		})
 
 
