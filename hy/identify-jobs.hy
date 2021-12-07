@@ -84,21 +84,23 @@
 		(with [f (open filename)]
 			(try
 				(for [line f] 
-					(if (not (.startswith (.strip line) "#")) 
-						(do
-							(if (.startswith (.strip (.upper line)) "EXEC")
-								(setv r line))	
-							(if (in "mpirun" (.strip line))
-								(setv r line))	
-							(if (in "mpiexec" (.strip line))
-								(setv r line))	
-							(if (in "gerun" (.strip line))
-								(setv r line))	
-							(if (in "cp2k." (.strip line))
-								(setv r line))	
-							(for [l launchers]
-								(if (.startswith (.strip line) l)
-									(setv r line)
+					(if (not (.startswith (.strip line) "#"))
+						(if (not (.startswith (.strip line) "module"))
+							(do
+								(if (.startswith (.strip (.upper line)) "EXEC")
+									(setv r line))	
+								(if (in "mpirun" (.strip line))
+									(setv r line))	
+								(if (in "mpiexec" (.strip line))
+									(setv r line))	
+								(if (in "gerun" (.strip line))
+									(setv r line))	
+								(if (in "cp2k." (.strip line))
+									(setv r line))	
+								(for [l launchers]
+									(if (.startswith (.strip line) l)
+										(setv r line)
+									)
 								)
 							)
 						)
