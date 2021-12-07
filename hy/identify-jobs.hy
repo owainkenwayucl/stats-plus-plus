@@ -63,8 +63,11 @@
 		"unknown code 9"   ["abinit"]
 		"unknown code 10"  ["dynamic.x"]
 		"yambo"            ["yambo"]
-		"dftb+"            ["dftb+"]
+		"dftb+"            ["dftb+" "dftb_opt.sh"]
 		"taskfarmer"       ["taskfarmer"]
+		"boffin"           ["boffin"]
+		"denise"           ["denise"]
+		"orca"             ["orca" "ORCA"]
 		})
 
 
@@ -78,7 +81,9 @@
 		})
 
 ; Common starts of line that indicate the code
-(setv launchers ["export MDR" "export CMD" "CMD=" "export PW" "PW=" "EXEC=" "export EXEC" "UNRES_BIN" "chemsh" "g16" "g09" "star" "cfx5solve" "fluent" "R " "Rscript " "python" "matlab" "gmx" "USPEX" "mcsqs" "time" "./ramses2gadget" "abaqus" "CFD-SOLVER" "mdrun" "/usr/bin/time" "$HOME/bin" "${HOME}/bin" "${HOME}/src" "$HOME/src" "./calypso.x" "ansysdt"])
+(setv launchers ["export MDR" "export CMD" "CMD=" "export PW" "PW=" "EXEC=" "export EXEC" "UNRES_BIN" "chemsh" "g16" "g09" "star" "cfx5solve" "fluent" "R " "Rscript " "python" "matlab" "gmx" "USPEX" "mcsqs" "time" "./ramses2gadget" "abaqus" "CFD-SOLVER" "mdrun" "/usr/bin/time" "$HOME/bin" "${HOME}/bin" "${HOME}/src" "$HOME/src" "./calypso.x" "ansysdt" "wfl"])
+
+(setv directs ["cp2k." "orca" "dftp_opt"])
 
 ; Convert a job number to a filename based on the service.
 (defn setfname [service filename] (+ (get scriptloc service) filename))
@@ -101,13 +106,17 @@
 									(setv r line))	
 								(if (in "gerun" (.strip line))
 									(setv r line))	
-								(if (in "cp2k." (.strip line))
-									(setv r line))	
+								(for [l directs]
+									(if (in (.strip line) l)
+										(setv r line)
+									)
+								)
 								(for [l launchers]
 									(if (.startswith (.strip line) l)
 										(setv r line)
 									)
 								)
+.
 							)
 						)
 					)
