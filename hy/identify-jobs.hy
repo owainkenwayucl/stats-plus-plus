@@ -98,16 +98,8 @@
 					(if (not (.startswith (.strip line) "#"))
 						(if (not (.startswith (.strip line) "module"))
 							(do
-								(if (.startswith (.strip (.upper line)) "EXEC")
-									(setv r line))	
-								(if (in "mpirun" (.strip line))
-									(setv r line))	
-								(if (in "mpiexec" (.strip line))
-									(setv r line))	
-								(if (in "gerun" (.strip line))
-									(setv r line))	
-								(for [l directs]
-									(if (in (.strip line) l)
+								(for [d directs]
+									(if (in d (.strip line))
 										(setv r line)
 									)
 								)
@@ -116,6 +108,14 @@
 										(setv r line)
 									)
 								)
+								(if (.startswith (.strip (.upper line)) "EXEC")
+									(setv r line))	
+								(if (in "mpirun" (.strip line))
+									(setv r line))	
+								(if (in "mpiexec" (.strip line))
+									(setv r line))	
+								(if (in "gerun" (.strip line))
+									(setv r line))	
 
 							)
 						)
