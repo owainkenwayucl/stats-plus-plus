@@ -1,6 +1,8 @@
 ;; Tool to categorise jobs based on their archived job script.
 ;; Owain Kenway
 
+(setv DEBUG_MODE False)
+
 ; List of fingerprints for known apps.
 (setv binaries { 
 		"lammps"           ["lmp" "lammps"]
@@ -132,6 +134,7 @@
 		(except [FileNotFoundError] 
 			(do (setv r "")))
 	)
+	(if (DEBUG_MODE (if (= r "") (print filename))))
 	r
 )
 
@@ -148,6 +151,7 @@
 			(if (isx line b) (setv r a))
 		)
 	)
+	(if (DEBUG_MODE (if (= r "other") (print line))))
 	r
 )
 
@@ -224,7 +228,9 @@
 		)
 	)
 
-	(if (> 2 (len args))
+	(if (= 3 (len args)) (setv DEBUG_MODE True))
+
+	(if (> 3 (len args))
 		(do
 			(print "Run with period as first argument.")
 			(sys.exit 2)
