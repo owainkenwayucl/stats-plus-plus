@@ -85,6 +85,8 @@
 
 (setv directs ["cp2k." "orca" "dftp_opt"])
 
+(setv excludes (, "#" "echo"))
+
 ; Convert a job number to a filename based on the service.
 (defn setfname [service filename] (+ (get scriptloc service) filename))
 
@@ -95,7 +97,7 @@
 		(with [f (open filename)]
 			(try
 				(for [line f] 
-					(if (not (.startswith (.strip line) "#"))
+					(if (not (.startswith (.strip line) excludes))
 						(if (not (.startswith (.strip line) "module"))
 							(do
 								(for [d directs]
