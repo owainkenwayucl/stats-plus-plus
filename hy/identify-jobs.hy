@@ -66,8 +66,9 @@
 		"dftb+"            ["dftb+" "dftb_opt.sh"]
 		"taskfarmer"       ["taskfarmer"]
 		"boffin"           ["boffin"]
-		"denise"           ["denise"]
+		"denise"           ["denise" "fwi"]
 		"orca"             ["orca" "ORCA"]
+		"n2p2"             ["nnp-train"]
 		})
 
 
@@ -81,7 +82,7 @@
 		})
 
 ; Common starts of line that indicate the code
-(setv launchers ["export MDR" "export CMD" "CMD=" "export PW" "PW=" "EXEC=" "export EXEC" "UNRES_BIN" "chemsh" "g16" "g09" "star" "cfx5solve" "fluent" "R " "Rscript " "python" "matlab" "gmx" "USPEX" "mcsqs" "time" "./ramses2gadget" "abaqus" "CFD-SOLVER" "mdrun" "/usr/bin/time" "$HOME/bin" "${HOME}/bin" "${HOME}/src" "$HOME/src" "./calypso.x" "ansysdt" "wfl"])
+(setv launchers ["export MDR" "export CMD" "CMD=" "export PW" "PW=" "EXEC=" "export EXEC" "UNRES_BIN" "chemsh" "g16" "g09" "star" "cfx5solve" "fluent" "R " "Rscript " "python" "matlab" "gmx" "USPEX" "mcsqs" "time" "./ramses2gadget" "abaqus" "CFD-SOLVER" "mdrun" "/usr/bin/time" "$HOME/bin" "${HOME}/bin" "${HOME}/src" "$HOME/src" "./calypso.x" "ansysdt" "wfl" "chemsh" "time"])
 
 (setv directs ["cp2k." "orca" "dftp_opt"])
 
