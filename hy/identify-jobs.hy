@@ -134,7 +134,7 @@
 		(except [FileNotFoundError] 
 			(do (setv r "")))
 	)
-	(if (DEBUG_MODE (if (= r "") (print filename))))
+	(if DEBUG_MODE (if (= r "") (print filename)))
 	r
 )
 
@@ -151,7 +151,7 @@
 			(if (isx line b) (setv r a))
 		)
 	)
-	(if (DEBUG_MODE (if (= r "other") (print line))))
+	(if DEBUG_MODE (if (= r "other") (print line)))
 	r
 )
 
