@@ -8,6 +8,7 @@ def gendeptstats(service, today, sep='|', nmonths=12, DEBUG=False, faculty=None)
     import sys
 
     dbt.DEBUG = DEBUG
+    print("Selected faculty: ", faculty)
 
     service_db = dbt.SERVICE_DB[service.lower()]
     monthstart = datetime.date(today.year, today.month, 1)
@@ -22,7 +23,6 @@ def gendeptstats(service, today, sep='|', nmonths=12, DEBUG=False, faculty=None)
         print(dm.datetoperiod(months[i]), end=sep)
     print("")
 
-
     keys = {'%DB%':service_db}
     query = st.templatefile(filename="sql/cputime-by-department.sql", keys=keys)
     results = dbt.dbquery(db=keys['%DB%'], query=query)
@@ -35,6 +35,7 @@ def gendeptstats(service, today, sep='|', nmonths=12, DEBUG=False, faculty=None)
     else: 
         # Get the latest faculty map.
         fmap = fm.getmap()
+        
         departments=fmap[faculty]
 
     for a in departments:
@@ -88,7 +89,7 @@ if __name__ == '__main__':
     if args.v == True:
         DEBUG = True
 
-    if args.f == True:
+    if args.f != None:
         faculty = args.f 
 
     gendeptstats(service, today, sep, nmonths, DEBUG, faculty)
