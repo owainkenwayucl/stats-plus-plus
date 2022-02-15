@@ -102,3 +102,14 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# "binaries" (actually links)
+cputime
+cputime-by-ref
+dept-users
+miscellc
+time-by-cost-by-inst
+time-by-cost-by-inst-user
+unique-users-over-all-time
+usage-by-department
+usage-by-faculty
