@@ -68,7 +68,7 @@ if __name__ == '__main__':
     parser.add_argument('-s', metavar='sep', type=str, help="CSV seperator (default: |)")
     parser.add_argument('-c', metavar='cluster', type=str, help="Cluster to generate stats for (default: grace)")
     parser.add_argument('-m', metavar='months', type=int, help="Number of months to count back (default: 12)")
-    parser.add_argument('-f', metavar='faculty', type=int, help="Faculty to generate stats for")
+    parser.add_argument('-f', metavar='faculty', type=str, help="Faculty to generate stats for")
     parser.add_argument('-v', action='store_true', help='Print out debugging info.')
 
     args = parser.parse_args()
