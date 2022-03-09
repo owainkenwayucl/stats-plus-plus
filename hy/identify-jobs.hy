@@ -230,7 +230,7 @@
 	(global DEBUG_MODE)
 	(if (= 3 (len args)) (setv DEBUG_MODE True))
 
-	(if (> 3 (len args))
+	(if (> 2 (len args))
 		(do
 			(print "Run with period as first argument.")
 			(sys.exit 2)
